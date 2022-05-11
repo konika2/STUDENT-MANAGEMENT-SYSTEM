@@ -71,6 +71,7 @@ ss <<  "INSERT INTO kproject (NAME,STUD_ID,AADHAR,GUARDIAN,COURSE,DURATION,FEE,M
     const char* q= query.c_str();
     qstate = mysql_query(conn,q);
     if(qstate==0){
+            system("cls");
         cout<<"\n\n\n\nRecord inserted successfully! .......\n";
     }
 else {
@@ -133,7 +134,7 @@ modify(MYSQL*conn)
          if(x==1)
          {
 
-             cout<<"\n\nENTER NEW MARKS : "<<" ";
+             cout<<"\n\n\tENTER NEW MARKS : "<<" ";
              cin>>markc;
 
 
@@ -147,6 +148,7 @@ modify(MYSQL*conn)
                    const char* q = query.c_str();
                    qstate = mysql_query(conn, q);
                    if(qstate == 0){
+                        system("cls");
                    cout << "\n\nRecord Updated successfully! ..." << endl;
                    }
                    else{
@@ -158,7 +160,7 @@ modify(MYSQL*conn)
         else if(x==2)
          {
 
-             cout<<"\n\nENTER NEW FEE : "<<" ";
+             cout<<"\n\n\tENTER NEW FEE : "<<" ";
              cin>>feed;
 
                    stringstream ss;
@@ -169,6 +171,7 @@ modify(MYSQL*conn)
                    const char* q = query.c_str();
                    qstate = mysql_query(conn, q);
                    if(qstate == 0){
+                        system("cls");
                    cout << "\n\nRecord Updated successfully! ..." << endl;
                    }
                    else{
@@ -180,7 +183,7 @@ modify(MYSQL*conn)
         else  if(x==3)
          {
 
-             cout<<"\n\nENTER THE NEW DURATION OF COURSE : "<<" ";
+             cout<<"\n\n\tENTER THE NEW DURATION OF COURSE : "<<" ";
              cin>>dr;
 
                    stringstream ss;
@@ -191,6 +194,7 @@ modify(MYSQL*conn)
                    const char* q = query.c_str();
                    qstate = mysql_query(conn, q);
                    if(qstate == 0){
+                        system("cls");
                    cout << "\n\nRecord Updated successfully! ..." << endl;
                    }
                    else{
@@ -228,6 +232,7 @@ modify(MYSQL*conn)
     string query= ss.str();
     const char *q = query.c_str();
     mysql_query(conn,q);
+    system("cls");
     cout<<" Record found... \n\n\n Record deleted successfully!";
  }
  else {
@@ -298,7 +303,7 @@ modify(MYSQL*conn)
 
 	system("CLS");
 
-
+admin:
 
 	cout << "\n\n\t * WELCOME TO ADMIN PANEL *  " << endl;
 	cout << "\n\n\t  PLEASE LOGIN " << endl;
@@ -312,7 +317,9 @@ modify(MYSQL*conn)
 
     }
 
-	if (usrn == username && pswd[ko] == password[ko])
+
+	if (usrn == username)
+
 	{
 		system("CLS");
 		int x;
@@ -335,14 +342,24 @@ modify(MYSQL*conn)
 			switch(x)
              {
 			case 1:insert(conn);
+                    system("pause");
+                    system("cls");
 				break;
 			case 2: modify(conn);
+			system("pause");
+                    system("cls");
 				break;
 			case 3: deletee(conn);
+			system("pause");
+                    system("cls");
 				break;
             	case 4: display(conn);
+            	system("pause");
+                    system("cls");
                  		break;
-            	case 5:goto op;
+            	case 5:
+                    system("cls");
+                    goto op;
 				 break;
 			case 6:exit(0);
 			     break;
@@ -352,25 +369,17 @@ modify(MYSQL*conn)
 			}
 		}
 	}
+
+
 	else if (usrn != username)
 	{
-		cout << "\n\t\tInvalid username please try again";
+		cout << "\n\t\tInvalid credentials please try again";
 		Sleep(2000);
-		goto op;
+		system("cls");
+		goto admin;
 	}
-	else if (pswd[ko] != password[ko])
-	{
-		cout << "\n\t\tInvalid password please try again";
-		Sleep(2000);
-		goto op;
-	}
-	else {
-		cout << "\n\t\tInvalid username and password!";
-		Sleep(2000);
-		goto op;
-	}
-}
-  if(s==2){
+    }
+ else if(s==2){
 	system("cls");
       string username;
       char password[10];
@@ -397,6 +406,7 @@ modify(MYSQL*conn)
 	cout << "\n\n\t\tSigned up successfully!";
 	Sleep(2000);
 	system("CLS");
+on:
 	cout << "\n\n\t    * STUDENT  CONTROL PANEL * " << endl;
 	cout << "\n\n\n\t\t  STUDENT  LOGIN ---" << endl;
 	cout << "\n\t\tPlease enter your username : ";
@@ -407,36 +417,29 @@ modify(MYSQL*conn)
 	  	  pswd[ko]=_getch();
 	      cout<<"*"; }
 
-	if (usrn == username && pswd[ko] == password[ko])
+	if (usrn == username)
 	{
 		system("CLS");
 		int x;
 
 		display(conn);
 		system("PAUSE");
-	}
-	else if (usrn != username)
-	{
-		cout << "\n\t\tInvalid username please try again";
-		Sleep(2000);
-		goto op;
-	}
-	else if (pswd[ko] != password[ko])
-	{
-		cout << "\n\t\tInvalid password please try again";
-		Sleep(2000);
+		system("cls");
 		goto op;
 	}
 	else {
-		cout << "\n\t\tInvalid username and password";
+		cout << "\n\t\tInvalid credentials! Please try again...";
 		Sleep(2000);
-		goto op;
+		system("cls");
+		goto on;
 	}
-}
-
-  system("CLS");
-  goto op;
-
+ }
+	else {
+        cout << "\n\t\tInvalid choice...";
+        system("PAUSE");
+		system("cls");
+        goto op;
+	}
 
   return 0;
    }
